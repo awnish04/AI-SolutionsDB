@@ -1,24 +1,19 @@
 require("dotenv").config();
-const express = require("express");
-const { ApolloServer } = require("apollo-server-express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const typeDefs = require("./graphql/schema");
-const resolvers = require("./graphql/resolvers");
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { connect } from "mongoose";
+import cors from "cors";
+import typeDefs from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
 
 const app = express();
 app.use(cors());
 
 // MongoDB connection
-mongoose
-  // .connect("mongodb://localhost:27017/inquiries", {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  // })
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -42,7 +37,3 @@ const startServer = async () => {
 
 // Initialize the server
 startServer();
-
-
-
-
