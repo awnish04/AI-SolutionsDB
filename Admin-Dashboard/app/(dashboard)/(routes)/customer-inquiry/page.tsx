@@ -17,6 +17,13 @@ interface Inquiry {
   message: string;
 }
 
+// Define the expected response structure from the GraphQL query
+interface GraphQLResponse {
+  data: {
+    getInquiries: Inquiry[];
+  };
+}
+
 const Page = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -24,8 +31,10 @@ const Page = () => {
   useEffect(() => {
     const fetchInquiries = async () => {
       try {
-        const response = await axios.post("http://localhost:5001/graphql", {
-          query: `
+        const response = await axios.post<GraphQLResponse>(
+          "http://localhost:5001/graphql",
+          {
+            query: `
             query {
               getInquiries {
                 id
@@ -40,7 +49,8 @@ const Page = () => {
               }
             }
           `,
-        });
+          }
+        );
 
         setInquiries(response.data.data.getInquiries || []);
       } catch (error) {
