@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "start-server": "node server/server.js",
-    "start-all": "concurrently \"npm run start-server\" \"npm run dev\""
+    "start-all": "c,oncurrently \"npm run start-server\" \"npm run dev\""
   },
   "dependencies": {
     "@clerk/nextjs": "^4.28.1",
@@ -20,6 +20,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@vercel/node": "^5.0.0",
     "apollo-server-express": "^3.13.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
