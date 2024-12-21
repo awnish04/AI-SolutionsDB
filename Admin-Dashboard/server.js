@@ -50,8 +50,8 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const typeDefs = require("./graphql/schema");
-const resolvers = require("./graphql/resolvers");
+const typeDefs = require("./server/graphql/schema");
+const resolvers = require("./server/graphql/resolvers");
 
 const app = express();
 app.use(cors());
