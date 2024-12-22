@@ -40,11 +40,11 @@ const startServer = async () => {
   server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
 
   // Start the Express server
+  app.listen(5001, console.log("Server is running on PORT "));
   app.use("/", (req, res) => {
     res.send("Server running");
     console.log("Server running on http://localhost:5001");
   });
-  app.listen(5001, console.log("Server is running on PORT 5001"));
 };
 
 // Initialize the server
