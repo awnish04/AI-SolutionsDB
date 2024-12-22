@@ -1,5 +1,5 @@
 {
-  "name": "Admin-Dashboard",
+  "name": "admin-dashboard",
   "version": "1.0.0",
   "private": true,
   "description": "Admin Dashboard with integrated backend server",
@@ -48,6 +48,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "concurrently": "^9.1.0",
     "eslint": "^8",
     "eslint-config-next": "^14.2.21",
     "postcss": "^8",

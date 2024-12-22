@@ -13,16 +13,17 @@ const ContactForms = () => {
     jobDetails: "",
     message: "",
   });
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
+  const API_URL = process.env.REACT_APP_GRAPHQL_ENDPOINT;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Sending your message...");
     try {
-      const response = await axios.post("http://localhost:5001/graphql", {
+      const response = await axios.post(API_URL, {
         query: `
           mutation {
             createInquiry(

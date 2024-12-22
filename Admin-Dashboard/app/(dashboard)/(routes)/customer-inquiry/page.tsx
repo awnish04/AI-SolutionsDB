@@ -29,12 +29,14 @@ const Page = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
+    const API_URL =
+      process.env.REACT_APP_GRAPHQL_ENDPOINT || "http://localhost:5001/graphql";
+    let isMounted = true; // To track if the component is still mounted
+
     const fetchInquiries = async () => {
       try {
-        const response = await axios.post<GraphQLResponse>(
-          "http://localhost:5001/graphql",
-          {
-            query: `
+        const response = await axios.post<GraphQLResponse>(API_URL, {
+          query: `
             query {
               getInquiries {
                 id
@@ -49,16 +51,24 @@ const Page = () => {
               }
             }
           `,
-          }
-        );
+        });
 
-        setInquiries(response.data.data.getInquiries || []);
+        if (isMounted) {
+          setInquiries(response.data.data.getInquiries || []);
+        }
       } catch (error) {
-        console.error("Error fetching inquiries:", error);
+        if (isMounted) {
+          console.error("Error fetching inquiries:", error);
+          // Optionally: Set an error state or display a message
+        }
       }
     };
 
     fetchInquiries();
+
+    return () => {
+      isMounted = false; // Cleanup function to prevent state updates
+    };
   }, []);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {

@@ -1,19 +1,25 @@
 require("dotenv").config();
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
-import { connect } from "mongoose";
-import cors from "cors";
-import typeDefs from "./graphql/schema";
-import resolvers from "./graphql/resolvers";
+const express = require("express");
+const { ApolloServer } = require("apollo-server-express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const typeDefs = require("./graphql/schema");
+const resolvers = require("./graphql/resolvers");
 
 const app = express();
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["https://ai-solutions-db.vercel.app/"],
+  })
+);
 
 // MongoDB connection
-connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -25,14 +31,16 @@ connect(process.env.MONGO_URI, {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 // Start the Apollo Server and apply middleware
+// const port = process.env.PORT;
 const startServer = async () => {
   await server.start(); // Ensure server starts before applying middleware
   server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
 
   // Start the Express server
-  app.listen(5001, () => {
-    console.log("Server running on http://localhost:5001");
-  });
+  // app.listen(port, () => {
+  //   console.log("Server running on port ${port}");
+  // });
+  exports.handler = server.createHandler();
 };
 
 // Initialize the server
