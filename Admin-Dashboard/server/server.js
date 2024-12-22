@@ -7,25 +7,14 @@ const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 
 const app = express();
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: ["https://ai-solutions-db.vercel.app/"],
-//   })
-// );
-
-app.use(
-  cors({
-    origin: [
-      "https://ai-solutions-pwx1tgpoy-awnish04s-projects.vercel.app",
-      "https://ai-solutions-db-fc7t.vercel.app",
-    ],
-  })
-);
-
+app.use(cors());
 
 // MongoDB connection
 mongoose
+  // .connect("mongodb://localhost:27017/inquiries", {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  // })
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -41,18 +30,14 @@ mongoose
 const server = new ApolloServer({ typeDefs, resolvers });
 
 // Start the Apollo Server and apply middleware
-// const port = process.env.PORT;
 const startServer = async () => {
   await server.start(); // Ensure server starts before applying middleware
-  server.applyMiddleware({ app, path: "/graphql" });
-
-  // server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
+  server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
 
   // Start the Express server
-  app.listen(port, () => {
-    console.log("Server running on port ${port}");
+  app.listen(5001, () => {
+    console.log("Server running on http://localhost:5001");
   });
-  exports.handler = server.createHandler();
 };
 
 // Initialize the server

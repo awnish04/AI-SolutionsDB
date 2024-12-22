@@ -27,10 +27,17 @@ interface GraphQLResponse {
 const Page = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
   useEffect(() => {
     const API_URL =
       process.env.REACT_APP_GRAPHQL_ENDPOINT || "http://localhost:5001/graphql";
+
+    if (!API_URL) {
+      console.error(
+        "REACT_APP_GRAPHQL_ENDPOINT is not defined in the environment variables."
+      );
+      return;
+    }
+
     let isMounted = true; // To track if the component is still mounted
 
     const fetchInquiries = async () => {
@@ -105,10 +112,7 @@ const Page = () => {
         <InquiryTable inquiries={filteredInquiries} />
       </div>
     </div>
-    // <div className="bg-[#1E2020] pt-4 px-10 shadow-white">
-    //   <InquiryHeader searchQuery={searchQuery} onSearchChange={handleSearch} />
-    //   <InquiryTable inquiries={filteredInquiries} />
-    // </div>
+    
   );
 };
 
