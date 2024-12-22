@@ -28,8 +28,7 @@ const Page = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
-    const API_URL =
-      process.env.REACT_APP_GRAPHQL_ENDPOINT || "http://localhost:5001/graphql";
+    const API_URL = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
     if (!API_URL) {
       console.error(
@@ -112,7 +111,6 @@ const Page = () => {
         <InquiryTable inquiries={filteredInquiries} />
       </div>
     </div>
-    
   );
 };
 
