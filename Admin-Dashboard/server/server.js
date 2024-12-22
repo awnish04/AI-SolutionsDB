@@ -8,11 +8,21 @@ const resolvers = require("./graphql/resolvers");
 
 const app = express();
 // app.use(cors());
+// app.use(
+//   cors({
+//     origin: ["https://ai-solutions-db.vercel.app/"],
+//   })
+// );
+
 app.use(
   cors({
-    origin: ["https://ai-solutions-db.vercel.app/"],
+    origin: [
+      "https://ai-solutions-pwx1tgpoy-awnish04s-projects.vercel.app",
+      "https://ai-solutions-db-fc7t.vercel.app",
+    ],
   })
 );
+
 
 // MongoDB connection
 mongoose
@@ -34,12 +44,14 @@ const server = new ApolloServer({ typeDefs, resolvers });
 // const port = process.env.PORT;
 const startServer = async () => {
   await server.start(); // Ensure server starts before applying middleware
-  server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
+  server.applyMiddleware({ app, path: "/graphql" });
+
+  // server.applyMiddleware({ app }); // Apply GraphQL middleware to Express app
 
   // Start the Express server
-  // app.listen(port, () => {
-  //   console.log("Server running on port ${port}");
-  // });
+  app.listen(port, () => {
+    console.log("Server running on port ${port}");
+  });
   exports.handler = server.createHandler();
 };
 
