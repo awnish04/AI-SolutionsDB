@@ -28,7 +28,8 @@ const Page = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
-    const API_URL = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+    // const API_URL = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+    const API_URL = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`;
 
     if (!API_URL) {
       console.error(

@@ -18,7 +18,8 @@ const ContactForms = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const API_URL = process.env.REACT_APP_GRAPHQL_ENDPOINT;
+  // const API_URL = process.env.REACT_APP_GRAPHQL_ENDPOINT;
+  const API_URL = `${process.env.REACT_APP_GRAPHQL_ENDPOINT}/graphql`;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Sending your message...");
