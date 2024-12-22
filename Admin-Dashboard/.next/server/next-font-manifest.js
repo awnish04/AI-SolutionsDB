@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/awnishmehta/Downloads/AI-Solutions-secondary/Admin-Dashboard/app/layout\":[\"static/media/a34f9d1faa5f3315-s.p.woff2\"],\"/Users/awnishmehta/Downloads/AI-Solutions-secondary/Admin-Dashboard/app/(dashboard)/layout\":[\"static/media/f75d6d02e2924b13-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{},\"appUsingSizeAdjust\":false,\"pagesUsingSizeAdjust\":false}"
