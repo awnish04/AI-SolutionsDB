@@ -1,6 +1,4 @@
-
-
-const Inquiry = require("../models/Inquiry");
+const Inquiry = require("./models/Inquiry");
 
 const resolvers = {
   Query: {
@@ -39,5 +37,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-
-
