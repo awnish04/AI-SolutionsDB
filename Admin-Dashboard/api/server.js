@@ -9,7 +9,6 @@
 // const app = express();
 // app.use(cors());
 
-
 // mongoose
 //   .connect(process.env.MONGO_URI)
 //   .then(() => console.log("Connected to MongoDB"))
@@ -34,7 +33,6 @@
 // // Initialize the server
 // startServer();
 
-
 require("dotenv").config();
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
@@ -44,7 +42,19 @@ const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 
 const app = express();
-app.use(cors());
+// app.use(cors());
+const allowedOrigins = process.env.ALLOWED_ORIGIN.split(",");
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 
 // MongoDB connection
 mongoose
@@ -65,134 +75,6 @@ startServer();
 app.get("/", (req, res) => res.send("GraphQL API running"));
 
 module.exports = app; // Export for Vercel
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const { ApolloServer } = require("apollo-server-micro");
 // const mongoose = require("mongoose");
