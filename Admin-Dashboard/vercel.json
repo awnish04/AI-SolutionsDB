@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/graphql",
+      "destination": "/Admin-Dashboard/server/server.js"
+    }
+  ]
+}
