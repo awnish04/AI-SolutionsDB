@@ -184,7 +184,7 @@ const ProjectsDetails = ({ rating }) => {
           <a href="/" className="hover:underline">
             <span>Home</span>
           </a>
-          <a href="/projectlist" className="hover:underline">
+          <a href="/product" className="hover:underline">
             / <span>Products</span>
           </a>
           / <span>Product Details</span>
